@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 1103879834}
   - component: {fileID: 1103879833}
   - component: {fileID: 1103879837}
+  - component: {fileID: 1103879838}
   m_Layer: 0
   m_Name: player_test
   m_TagString: Untagged
@@ -326,6 +327,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1103879838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1103879832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1ec617abaa60034c9cee38438c41434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 10
+  jumpCount: 0
+  jumpLimit: 2
+  jumpForce: 6
 --- !u!1 &1112741112
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +355,7 @@ GameObject:
   - component: {fileID: 1112741113}
   m_Layer: 0
   m_Name: platform_ground_grass
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
