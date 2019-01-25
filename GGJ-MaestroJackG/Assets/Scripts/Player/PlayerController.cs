@@ -6,12 +6,10 @@ public class PlayerController : MonoBehaviour {
 
     public int moveSpeed, jumpCount, jumpLimit;
     public float jumpForce;
-
-    Transform playerPosition;
+    
     Rigidbody2D playerBody;
  
-    void Start () {
-        playerPosition = GetComponent<Transform>();
+    void Start () {      
         playerBody = GetComponent<Rigidbody2D>();      
     }
 	
@@ -23,17 +21,17 @@ public class PlayerController : MonoBehaviour {
         // Left
         if (Input.GetKey(KeyCode.A))
         {
-            playerPosition.position += new Vector3(-moveSpeed * Time.deltaTime, 0, 0);
+            transform.position += new Vector3(-moveSpeed * Time.deltaTime, 0, 0);
         }
 
         // Right
         if (Input.GetKey(KeyCode.D))
         {
-            playerPosition.position += new Vector3(moveSpeed * Time.deltaTime, 0, 0);
+            transform.position += new Vector3(moveSpeed * Time.deltaTime, 0, 0);
         }
 
         // Jump.
-        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < jumpLimit)
+        if (Input.GetKeyDown(KeyCode.W) && jumpCount < jumpLimit)
         {
             playerBody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             jumpCount++;
