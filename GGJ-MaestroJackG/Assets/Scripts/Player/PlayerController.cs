@@ -48,8 +48,7 @@ public class PlayerController : MonoBehaviour {
         {
             playerBody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             jumpCount++;
-            airborne = true;
-            FindObjectOfType<AudioManager>().Play("Eagle"); // A simple test of Brackeys' Audio manager.
+            airborne = true;          
         }       
     }
 
@@ -66,13 +65,17 @@ public class PlayerController : MonoBehaviour {
         {
             jumpCount = 0;
             airborne = false;          
-        }
+        }        
+    }
 
-        if(collision.gameObject.tag == "Orb")
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Orb")
         {
             Destroy(collision.gameObject); // Should probably move this to another class.
             collectiblesFound++;
             collectibleCountDisplay.text = collectiblesFound.ToString(); // Update the HUD. 
+            //FindObjectOfType<AudioManager>().Play("Eagle"); // Play a sound effect to represent a new item collected.
         }
     }
 }
