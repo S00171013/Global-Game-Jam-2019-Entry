@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
     
     Rigidbody2D playerBody;
     Animator animator;
+    
  
     void Start () {      
         playerBody = GetComponent<Rigidbody2D>();
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour {
             playerBody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             jumpCount++;
             airborne = true;
+            FindObjectOfType<AudioManager>().Play("Eagle"); // A simple test of Brackeys' Audio manager.
         }       
     }
 
@@ -56,6 +58,8 @@ public class PlayerController : MonoBehaviour {
         {
             jumpCount = 0;
             airborne = false;
+
+            //FindObjectOfType<AudioManager>().Play("Demonic"); Just a test.
         }
     }
 }
