@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Orb
+  - House
+  - Gate
   layers:
   - Default
   - TransparentFX

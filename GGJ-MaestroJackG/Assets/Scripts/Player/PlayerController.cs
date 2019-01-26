@@ -7,10 +7,12 @@ public class PlayerController : MonoBehaviour {
 
     public int moveSpeed, jumpCount, jumpLimit;
     public float jumpForce;
-    public Text collectibleCountDisplay;
+    public Text collectibleCountDisplay, overallScoreDisplay;
 
     bool moving, airborne;
-    int collectiblesFound;
+    int collectiblesFound, fMembersFound;
+
+    const int MEMBER_COUNT = 4;
     
     Rigidbody2D playerBody;
     Animator animator;    
@@ -20,8 +22,7 @@ public class PlayerController : MonoBehaviour {
         animator = GetComponent<Animator>();          
     }
 	
-	void Update () {
-        
+	void Update () {       
         HandleMovement();
         HandleAnimations();
 	}
@@ -52,7 +53,6 @@ public class PlayerController : MonoBehaviour {
         }       
     }
 
-
     void HandleAnimations() {
         animator.SetBool("Moving", moving); 
         animator.SetInteger("JumpCount", jumpCount);
@@ -76,6 +76,20 @@ public class PlayerController : MonoBehaviour {
             collectiblesFound++;
             collectibleCountDisplay.text = collectiblesFound.ToString(); // Update the HUD. 
             //FindObjectOfType<AudioManager>().Play("Eagle"); // Play a sound effect to represent a new item collected.
+        }
+
+        if (collision.gameObject.tag == "House")
+        {
+            overallScoreDisplay.text = string.Format("Score: "+fMembersFound+"/"+ MEMBER_COUNT);
+            overallScoreDisplay.gameObject.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {       
+        if (collision.gameObject.tag == "House")
+        {          
+            overallScoreDisplay.gameObject.SetActive(false);
         }
     }
 }
