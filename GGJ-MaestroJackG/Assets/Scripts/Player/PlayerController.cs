@@ -1,28 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
     public int moveSpeed, jumpCount, jumpLimit;
     public float jumpForce;
+    public Text collectibleCountDisplay;
 
     bool moving, airborne;
+    int collectiblesFound;
     
     Rigidbody2D playerBody;
-    Animator animator;
-    
+    Animator animator;    
  
     void Start () {      
         playerBody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();          
     }
 	
 	void Update () {
-        animator.SetBool("Moving", moving); // Can this be moved to the Start() method? Worth testing later.
-        animator.SetInteger("JumpCount", jumpCount);
-        animator.SetBool("Airborne", airborne);
+        
         HandleMovement();
+        HandleAnimations();
 	}
 
     void HandleMovement() {
@@ -52,14 +53,26 @@ public class PlayerController : MonoBehaviour {
         }       
     }
 
+
+    void HandleAnimations() {
+        animator.SetBool("Moving", moving); 
+        animator.SetInteger("JumpCount", jumpCount);
+        animator.SetBool("Airborne", airborne);
+    }
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Ground")
         {
             jumpCount = 0;
-            airborne = false;
+            airborne = false;          
+        }
 
-            //FindObjectOfType<AudioManager>().Play("Demonic"); Just a test.
+        if(collision.gameObject.tag == "Orb")
+        {
+            Destroy(collision.gameObject); // Should probably move this to another class.
+            collectiblesFound++;
+            collectibleCountDisplay.text = collectiblesFound.ToString(); // Update the HUD. 
         }
     }
 }

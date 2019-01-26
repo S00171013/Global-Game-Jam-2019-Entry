@@ -54,7 +54,7 @@ MonoBehaviour:
   mixerGroup: {fileID: 0}
   sounds:
   - name: Demonic
-    clip: {fileID: 8300000, guid: c57e4f111fb8fdf4d88248f52b0bd15f, type: 3}
+    clip: {fileID: 8300000, guid: 70345a15f0c1be249b2b10cae5671b02, type: 3}
     volume: 0.34
     volumeVariance: 0
     pitch: 1
@@ -63,7 +63,7 @@ MonoBehaviour:
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
   - name: Eagle
-    clip: {fileID: 8300000, guid: 268c0a3423553224998b8001ccd05f14, type: 3}
+    clip: {fileID: 8300000, guid: c8e13386b5ae7894788a34ee09d172c7, type: 3}
     volume: 0.37
     volumeVariance: 0
     pitch: 1
