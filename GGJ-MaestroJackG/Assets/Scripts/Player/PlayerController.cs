@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour {
     public int moveSpeed, jumpCount, jumpLimit;
     public float jumpForce;
     public Text collectibleCountDisplay, overallScoreDisplay;
+    public Transform respawnLocation;
+
 
     bool moving, airborne;
     public int collectiblesFound, fMembersFound;
@@ -15,8 +17,8 @@ public class PlayerController : MonoBehaviour {
     const int MEMBER_COUNT = 4;
     
     Rigidbody2D playerBody;
-    Animator animator;    
- 
+    Animator animator;
+    
     void Start () {      
         playerBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();          
@@ -65,7 +67,19 @@ public class PlayerController : MonoBehaviour {
         {
             jumpCount = 0;
             airborne = false;          
-        }        
+        }
+
+        if (collision.gameObject.tag == "Hazard")
+        {
+            transform.position = respawnLocation.position;
+            FindObjectOfType<AudioManager>().Play("Demonic");
+        }
+
+        if (collision.gameObject.tag == "Boundary")
+        {
+            transform.position = respawnLocation.position;
+            FindObjectOfType<AudioManager>().Play("Anger");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -80,14 +94,9 @@ public class PlayerController : MonoBehaviour {
 
         if (collision.gameObject.tag == "House")
         {
-            overallScoreDisplay.text = string.Format("Score: "+fMembersFound+"/"+ MEMBER_COUNT);
+            overallScoreDisplay.text = string.Format("Family found: "+fMembersFound+"/"+ MEMBER_COUNT);
             overallScoreDisplay.gameObject.SetActive(true);
-        }
-
-        //if (collision.gameObject.tag == "FamilyMember")
-        //{
-            
-        //}
+        }       
     }
 
     private void OnTriggerExit2D(Collider2D collision)

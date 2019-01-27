@@ -26,13 +26,10 @@ public class FamilyMember : MonoBehaviour
         {            
             message.text = string.Format("You found your "+ memberName + "!");
             message.gameObject.SetActive(true);
-        }
 
-        if(found && tm.TimeCount(3))
-        {
             playerRef.fMembersFound++;
             Destroy(this.gameObject);
-        }
+        }        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -9,6 +9,8 @@ TagManager:
   - House
   - Gate
   - FamilyMember
+  - Hazard
+  - Boundary
   layers:
   - Default
   - TransparentFX
