@@ -18,7 +18,8 @@ public class MainMenuController : MonoBehaviour
 
 	void Start () {
         phase = menuState.MAIN;
-    }    
+        FindObjectOfType<AudioManager>().Play("Turkish March"); // Play the main menu BGM.
+    }
 
     public void OpenQuitDialog() {
         if (phase == menuState.MAIN) {
@@ -28,7 +29,12 @@ public class MainMenuController : MonoBehaviour
     }
 
     public void StartGame() {
-        if (phase == menuState.MAIN) SceneManager.LoadScene("sc_level_test");
+        if (phase == menuState.MAIN)
+        {
+            FindObjectOfType<AudioManager>().Stop("Turkish March"); // Stop the main menu BGM.
+            FindObjectOfType<AudioManager>().Play("Polovtsian Dances"); // Play the main menu BGM.
+            SceneManager.LoadScene("sc_level_test");
+        }
     }    
 
     public void CloseQuitDialog() {
