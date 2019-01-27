@@ -30,10 +30,8 @@ public class MainMenuController : MonoBehaviour
 
     public void StartGame() {
         if (phase == menuState.MAIN)
-        {
-            FindObjectOfType<AudioManager>().Stop("Turkish March"); // Stop the main menu BGM.
-            FindObjectOfType<AudioManager>().Play("Polovtsian Dances"); // Play the main menu BGM.
-            SceneManager.LoadScene("sc_level_test");
+        {                     
+            SceneManager.LoadScene("sc_menu_intro");
         }
     }    
 

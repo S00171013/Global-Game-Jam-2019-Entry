@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
@@ -11,10 +12,10 @@ public class PlayerController : MonoBehaviour {
     public Transform respawnLocation;
 
 
-    bool moving, airborne;
+    bool moving, airborne, gameWon;
     public int collectiblesFound, fMembersFound;
 
-    const int MEMBER_COUNT = 4;
+    const int MEMBER_COUNT = 3;
     
     Rigidbody2D playerBody;
     Animator animator;
@@ -51,7 +52,9 @@ public class PlayerController : MonoBehaviour {
         {
             playerBody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             jumpCount++;
-            airborne = true;          
+            airborne = true;
+
+            FindObjectOfType<AudioManager>().Play("Eagle"); // Play a sound effect to represent a new item collected.
         }       
     }
 
@@ -72,13 +75,13 @@ public class PlayerController : MonoBehaviour {
         if (collision.gameObject.tag == "Hazard")
         {
             transform.position = respawnLocation.position;
-            FindObjectOfType<AudioManager>().Play("Demonic");
+            FindObjectOfType<AudioManager>().Play("Anger");
         }
 
         if (collision.gameObject.tag == "Boundary")
         {
             transform.position = respawnLocation.position;
-            FindObjectOfType<AudioManager>().Play("Anger");
+            FindObjectOfType<AudioManager>().Play("Demonic");
         }
     }
 
@@ -89,13 +92,19 @@ public class PlayerController : MonoBehaviour {
             Destroy(collision.gameObject); // Should probably move this to another class.
             collectiblesFound++;
             collectibleCountDisplay.text = collectiblesFound.ToString(); // Update the HUD. 
-            //FindObjectOfType<AudioManager>().Play("Eagle"); // Play a sound effect to represent a new item collected.
+            FindObjectOfType<AudioManager>().Play("Collect"); // Play a sound effect to represent a new item collected.
         }
 
         if (collision.gameObject.tag == "House")
         {
             overallScoreDisplay.text = string.Format("Family found: "+fMembersFound+"/"+ MEMBER_COUNT);
             overallScoreDisplay.gameObject.SetActive(true);
+
+            if(fMembersFound >= MEMBER_COUNT)
+            {
+                FindObjectOfType<AudioManager>().Stop("Polovtsian Dances");
+                SceneManager.LoadScene("sc_menu_completion");
+            }
         }       
     }
 

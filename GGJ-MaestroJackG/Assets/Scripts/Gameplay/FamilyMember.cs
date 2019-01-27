@@ -24,7 +24,7 @@ public class FamilyMember : MonoBehaviour
     void Update() {
         if(found)
         {            
-            message.text = string.Format("You found your "+ memberName + "!");
+            message.text = string.Format("You found your "+ memberName + " here!");
             message.gameObject.SetActive(true);
 
             playerRef.fMembersFound++;
@@ -36,6 +36,8 @@ public class FamilyMember : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            FindObjectOfType<AudioManager>().Play("Collect"); // Play a sound effect to represent a new item collected.
+
             found = true;
             //playerRef.fMembersFound++; // Add to the player's member count.
 
