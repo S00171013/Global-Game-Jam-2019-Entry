@@ -8,6 +8,7 @@ TagManager:
   - Orb
   - House
   - Gate
+  - FamilyMember
   layers:
   - Default
   - TransparentFX

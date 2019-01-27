@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
     public Text collectibleCountDisplay, overallScoreDisplay;
 
     bool moving, airborne;
-    int collectiblesFound, fMembersFound;
+    public int collectiblesFound, fMembersFound;
 
     const int MEMBER_COUNT = 4;
     
@@ -83,6 +83,11 @@ public class PlayerController : MonoBehaviour {
             overallScoreDisplay.text = string.Format("Score: "+fMembersFound+"/"+ MEMBER_COUNT);
             overallScoreDisplay.gameObject.SetActive(true);
         }
+
+        //if (collision.gameObject.tag == "FamilyMember")
+        //{
+            
+        //}
     }
 
     private void OnTriggerExit2D(Collider2D collision)

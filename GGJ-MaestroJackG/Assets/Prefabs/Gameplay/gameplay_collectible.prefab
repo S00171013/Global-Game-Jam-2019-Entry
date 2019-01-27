@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 58584686411450614}
   - component: {fileID: 114078031696243192}
   m_Layer: 0
-  m_Name: gameplay_collectable
+  m_Name: gameplay_collectible
   m_TagString: Orb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
